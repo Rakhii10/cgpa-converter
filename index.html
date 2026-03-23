@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CGPA to Percentage Converter | All Indian Universities 2025</title>
+  <meta name="description" content="Free CGPA to Percentage Converter for all Indian universities — VTU, Anna University, Mumbai, JNTU, GTU, AKTU, DU, Pune, Osmania, Calicut and 35+ more. Instant results." />
+  <meta name="keywords" content="CGPA to percentage, CGPA converter India, VTU CGPA, Anna University CGPA, JNTU CGPA, AKTU CGPA, GTU CGPA, percentage calculator engineering" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Lora:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f0f4ff;
+      --surface: #ffffff;
+      --surface2: #f5f8ff;
+      --border: #dde5f5;
+      --accent: #2563eb;
+      --accent2: #1d4ed8;
+      --accent-light: #eff6ff;
+      --accent-mid: #bfdbfe;
+      --text: #0f172a;
+      --muted: #64748b;
+      --success: #16a34a;
+      --danger: #dc2626;
+      --shadow: 0 1px 4px rgba(37,99,235,0.07), 0 4px 24px rgba(37,99,235,0.07);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+    .topbar { background: var(--accent); color: white; text-align: center; font-size: 0.78rem; font-weight: 500; padding: 0.55rem 1rem; letter-spacing: 0.02em; }
+    .container { max-width: 820px; margin: 0 auto; padding: 0 1.25rem 4rem; }
+    header { text-align: center; padding: 3rem 1rem 2rem; animation: fadeDown 0.5s ease both; }
+    .badge { display: inline-flex; align-items: center; gap: 0.4rem; background: var(--accent-light); border: 1px solid var(--accent-mid); color: var(--accent); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.3rem 0.85rem; border-radius: 100px; margin-bottom: 1.2rem; }
+    h1 { font-size: clamp(1.9rem, 5vw, 2.8rem); font-weight: 800; line-height: 1.15; letter-spacing: -0.03em; margin-bottom: 0.75rem; }
+    h1 em { font-style: italic; font-family: 'Lora', serif; color: var(--accent); }
+    .subtitle { color: var(--muted); font-size: 0.95rem; max-width: 500px; margin: 0 auto; line-height: 1.65; }
+    .stats-row { display: flex; justify-content: center; gap: 2rem; margin-top: 1.5rem; flex-wrap: wrap; }
+    .stat-num { font-size: 1.5rem; font-weight: 800; color: var(--accent); line-height: 1; }
+    .stat-label { font-size: 0.72rem; color: var(--muted); margin-top: 0.2rem; font-weight: 500; }
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 1.75rem; margin-bottom: 1.25rem; box-shadow: var(--shadow); animation: fadeUp 0.5s ease both; }
+    .card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.2rem; flex-wrap: wrap; gap: 0.5rem; }
+    .card-title { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+    .search-wrap { position: relative; margin-bottom: 1rem; }
+    .search-input { width: 100%; border: 1px solid var(--border); background: var(--surface2); color: var(--text); font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.88rem; padding: 0.65rem 1rem 0.65rem 2.4rem; border-radius: 10px; outline: none; transition: border-color 0.2s; }
+    .search-input:focus { border-color: var(--accent); }
+    .search-input::placeholder { color: var(--muted); }
+    .search-icon { position: absolute; left: 0.9rem; top: 50%; transform: translateY(-50%); color: var(--muted); pointer-events: none; }
+    .state-tabs-wrap { position: relative; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.4rem; }
+    .scroll-btn { background: var(--surface); border: 1px solid var(--border); color: var(--accent); border-radius: 50%; width: 28px; height: 28px; font-size: 1rem; cursor: pointer; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: all 0.15s; padding: 0; line-height: 1; }
+    .scroll-btn:hover { background: var(--accent); color: white; border-color: var(--accent); }
+    .state-tabs { display: flex; gap: 0.4rem; overflow-x: auto; padding-bottom: 0.5rem; scrollbar-width: none; flex: 1; }
+    .state-tabs::-webkit-scrollbar { display: none; }
+    .state-tab { background: var(--surface2); border: 1px solid var(--border); color: var(--muted); font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.75rem; font-weight: 600; padding: 0.4rem 0.85rem; border-radius: 100px; cursor: pointer; white-space: nowrap; transition: all 0.15s; }
+    .state-tab:hover { border-color: var(--accent); color: var(--accent); }
+    .state-tab.active { background: var(--accent); border-color: var(--accent); color: white; }
+    .uni-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 0.6rem; max-height: 300px; overflow-y: auto; padding-right: 0.2rem; scrollbar-width: thin; scrollbar-color: var(--accent-mid) transparent; }
+    .uni-grid::-webkit-scrollbar { width: 4px; }
+    .uni-grid::-webkit-scrollbar-thumb { background: var(--accent-mid); border-radius: 10px; }
+    .uni-btn { background: var(--surface2); border: 1px solid var(--border); color: var(--text); padding: 0.65rem 0.8rem; border-radius: 10px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 0.15s; text-align: left; line-height: 1.3; }
+    .uni-btn small { display: block; color: var(--muted); font-size: 0.68rem; font-weight: 400; margin-top: 0.1rem; }
+    .uni-btn:hover { border-color: var(--accent); background: var(--accent-light); color: var(--accent); }
+    .uni-btn.active { border-color: var(--accent); background: var(--accent); color: white; }
+    .uni-btn.active small { color: rgba(255,255,255,0.7); }
+    .formula-box { background: var(--accent-light); border: 1px solid var(--accent-mid); border-left: 3px solid var(--accent); border-radius: 10px; padding: 0.9rem 1rem; margin-top: 1rem; font-size: 0.85rem; }
+    .formula-box strong { color: var(--accent2); font-size: 0.95rem; font-weight: 700; display: block; margin-bottom: 0.2rem; }
+    .formula-box span { color: var(--muted); font-size: 0.8rem; }
+    .input-section { display: flex; gap: 0.85rem; align-items: flex-end; margin-bottom: 1.25rem; }
+    .input-group { flex: 1; }
+    label { display: block; font-size: 0.78rem; font-weight: 600; color: var(--muted); margin-bottom: 0.4rem; text-transform: uppercase; letter-spacing: 0.06em; }
+    input[type="number"] { width: 100%; background: var(--surface2); border: 2px solid var(--border); color: var(--text); font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.8rem; font-weight: 800; padding: 0.7rem 1rem; border-radius: 12px; outline: none; transition: border-color 0.2s; -moz-appearance: textfield; }
+    input::-webkit-outer-spin-button, input::-webkit-inner-spin-button { -webkit-appearance: none; }
+    input[type="number"]:focus { border-color: var(--accent); background: white; }
+    input[type="number"]::placeholder { color: #cbd5e1; }
+    .convert-btn { background: var(--accent); color: white; border: none; padding: 0.9rem 1.6rem; border-radius: 12px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.9rem; font-weight: 700; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+    .convert-btn:hover { background: var(--accent2); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(37,99,235,0.3); }
+    .error { color: var(--danger); font-size: 0.8rem; margin-top: 0.35rem; display: none; font-weight: 500; }
+    .error.show { display: block; }
+    .result-card { background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%); border-radius: 16px; padding: 1.75rem; text-align: center; display: none; color: white; position: relative; overflow: hidden; }
+    .result-card::before { content:''; position:absolute; top:-40px; right:-40px; width:120px; height:120px; border-radius:50%; background:rgba(255,255,255,0.07); }
+    .result-card.show { display: block; animation: popIn 0.4s cubic-bezier(0.34,1.56,0.64,1) both; }
+    .result-label { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.8; margin-bottom: 0.4rem; }
+    .result-value { font-size: clamp(3rem, 11vw, 5.5rem); font-weight: 800; line-height: 1; letter-spacing: -0.03em; }
+    .result-grade { margin-top: 0.6rem; font-size: 0.88rem; opacity: 0.9; font-weight: 500; }
+    .result-meta { display: flex; justify-content: center; gap: 2rem; margin-top: 1.2rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.2); flex-wrap: wrap; }
+    .result-meta-item .val { font-size: 1.1rem; font-weight: 700; }
+    .result-meta-item .lbl { font-size: 0.7rem; opacity: 0.7; margin-top: 0.1rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; }
+    .all-results { display: none; margin-top: 1rem; }
+    .all-results.show { display: block; animation: fadeUp 0.3s ease both; }
+    .all-results-header { display: flex; justify-content: space-between; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding: 0 0 0.5rem; border-bottom: 2px solid var(--border); margin-bottom: 0.25rem; }
+    .result-row { display: flex; justify-content: space-between; align-items: center; padding: 0.65rem 0; border-bottom: 1px solid var(--border); font-size: 0.86rem; }
+    .result-row:last-child { border-bottom: none; }
+    .result-row .uni-name { color: var(--text); font-weight: 600; }
+    .result-row .uni-formula { color: var(--muted); font-size: 0.75rem; }
+    .result-row .uni-pct { font-weight: 800; font-size: 1rem; color: var(--accent); }
+    .ad-slot { background: var(--surface); border: 1.5px dashed var(--border); border-radius: 12px; padding: 1rem; text-align: center; color: var(--muted); font-size: 0.75rem; margin: 1.25rem 0; min-height: 90px; display: flex; align-items: center; justify-content: center; }
+    .faq-title { font-size: 1.25rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 1rem; }
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-q { width: 100%; background: none; border: none; color: var(--text); font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.9rem; font-weight: 600; text-align: left; padding: 1rem 0; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+    .faq-arrow { width: 22px; height: 22px; border-radius: 50%; background: var(--accent-light); color: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; transition: transform 0.2s, background 0.2s; }
+    .faq-q.open .faq-arrow { transform: rotate(45deg); background: var(--accent); color: white; }
+    .faq-a { color: var(--muted); font-size: 0.86rem; line-height: 1.75; max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.2s; }
+    .faq-a.open { max-height: 260px; padding-bottom: 1rem; }
+    .formula-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+    .formula-table th { background: var(--surface2); color: var(--muted); font-weight: 700; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.07em; padding: 0.6rem 0.8rem; text-align: left; border-bottom: 2px solid var(--border); }
+    .formula-table td { padding: 0.6rem 0.8rem; border-bottom: 1px solid var(--border); }
+    .formula-table tr:last-child td { border-bottom: none; }
+    .formula-table td:last-child { color: var(--accent); font-weight: 700; }
+    .formula-table tr:hover td { background: var(--accent-light); }
+    footer { text-align: center; color: var(--muted); font-size: 0.77rem; margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border); line-height: 1.9; }
+    @keyframes fadeDown { from { opacity:0; transform:translateY(-16px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes fadeUp { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes popIn { from { opacity:0; transform:scale(0.92); } to { opacity:1; transform:scale(1); } }
+    @media (max-width: 500px) {
+      .input-section { flex-direction: column; }
+      .convert-btn { width: 100%; text-align: center; }
+      .uni-grid { grid-template-columns: repeat(2, 1fr); max-height: 240px; }
+      .stats-row { gap: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="topbar">🎓 Free for all Indian students · No login required · 35+ universities covered</div>
+
+<div class="container">
+  <header>
+    <div class="badge">✦ Updated 2025</div>
+    <h1>CGPA to <em>Percentage</em><br>Converter</h1>
+    <p class="subtitle">The most complete free converter for Indian students — covering 35+ universities including autonomous institutions.</p>
+    <div class="stats-row">
+      <div class="stat"><div class="stat-num">35+</div><div class="stat-label">Universities</div></div>
+      <div class="stat"><div class="stat-num">10</div><div class="stat-label">States Covered</div></div>
+      <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Free Forever</div></div>
+    </div>
+  </header>
+
+  <div class="ad-slot">Advertisement · Google AdSense</div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">Select Your University</div>
+      <div style="font-size:0.75rem;color:var(--muted)">35+ universities</div>
+    </div>
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input type="text" class="search-input" id="uniSearch" placeholder="Search university... e.g. VTU, Anna, JNTU, GTU" oninput="filterUniversities()" />
+    </div>
+    <div class="state-tabs-wrap">
+    <button class="scroll-btn" onclick="document.getElementById('stateTabs').scrollBy({left:-150,behavior:'smooth'})">‹</button>
+    <div class="state-tabs" id="stateTabs">
+      <button class="state-tab active" onclick="filterByState('all',this)">All</button>
+      <button class="state-tab" onclick="filterByState('karnataka',this)">Karnataka</button>
+      <button class="state-tab" onclick="filterByState('vtu-auto',this)">VTU Autonomous</button>
+      <button class="state-tab" onclick="filterByState('tamilnadu',this)">Tamil Nadu</button>
+      <button class="state-tab" onclick="filterByState('maharashtra',this)">Maharashtra</button>
+      <button class="state-tab" onclick="filterByState('delhi',this)">Delhi / NCR</button>
+      <button class="state-tab" onclick="filterByState('andhra',this)">AP / Telangana</button>
+      <button class="state-tab" onclick="filterByState('gujarat',this)">Gujarat</button>
+      <button class="state-tab" onclick="filterByState('up',this)">UP / MP</button>
+      <button class="state-tab" onclick="filterByState('rajasthan',this)">Rajasthan</button>
+      <button class="state-tab" onclick="filterByState('kerala',this)">Kerala</button>
+      <button class="state-tab" onclick="filterByState('national',this)">IIT / NIT / AICTE</button>
+    </div>
+    <button class="scroll-btn" onclick="document.getElementById('stateTabs').scrollBy({left:150,behavior:'smooth'})">›</button>
+    </div>
+    <div class="uni-grid" id="uniGrid"></div>
+    <div class="formula-box">
+      <strong id="formulaText">Percentage = (CGPA − 0.75) × 10</strong>
+      <span id="formulaNote">Used by VTU, Bangalore</span>
+      <span id="formulaAuto" style="display:none;margin-top:0.4rem;font-size:0.78rem;color:#2563eb;font-weight:600;">ℹ️ Most VTU autonomous colleges use CGPA × 10. Confirm with your college office if unsure.</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title" style="margin-bottom:1.2rem">Enter Your CGPA</div>
+    <div class="input-section">
+      <div class="input-group">
+        <label for="cgpaInput">Your CGPA (out of 10)</label>
+        <input type="number" id="cgpaInput" placeholder="e.g. 8.4" min="0" max="10" step="0.01" oninput="autoConvert()" />
+        <div class="error" id="errorMsg">⚠ Please enter a valid CGPA between 0.0 and 10.0</div>
+      </div>
+      <button class="convert-btn" onclick="convert()">Convert →</button>
+    </div>
+    <div class="result-card" id="resultCard">
+      <div class="result-label">Your Equivalent Percentage</div>
+      <div class="result-value" id="resultValue">—</div>
+      <div class="result-grade" id="resultGrade"></div>
+      <div class="result-meta">
+        <div class="result-meta-item"><div class="val" id="metaCgpa">—</div><div class="lbl">CGPA</div></div>
+        <div class="result-meta-item"><div class="val" id="metaUni">—</div><div class="lbl">University</div></div>
+        <div class="result-meta-item"><div class="val" id="metaClass">—</div><div class="lbl">Class</div></div>
+      </div>
+    </div>
+    <div class="all-results" id="allResults">
+      <div class="all-results-header"><span>University</span><span>Percentage</span></div>
+      <div id="allResultsList"></div>
+    </div>
+    <div id="showAllHint" style="display:none;background:var(--accent-light);border:1px solid var(--accent-mid);border-radius:10px;padding:0.85rem 1rem;font-size:0.85rem;color:var(--accent);font-weight:600;margin-top:0.75rem;text-align:center;">
+      ☝️ Enter your CGPA above and click Convert to compare all universities
+    </div>
+  </div>
+
+  <div class="ad-slot">Advertisement · Google AdSense</div>
+
+  <div class="card">
+    <div class="card-header"><div class="card-title">University Formula Reference Table</div></div>
+    <table class="formula-table">
+      <thead><tr><th>University</th><th>State</th><th>Formula</th></tr></thead>
+      <tbody id="formulaTableBody"></tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="faq-title">Frequently Asked Questions</div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">How do I convert CGPA to percentage for VTU?<span class="faq-arrow">+</span></button>
+      <div class="faq-a">VTU (Visvesvaraya Technological University) uses: Percentage = (CGPA − 0.75) × 10. For example, a CGPA of 8.5 gives (8.5 − 0.75) × 10 = 77.5%. This is officially prescribed by VTU for all affiliated colleges in Karnataka.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">What is the AICTE recommended formula?<span class="faq-arrow">+</span></button>
+      <div class="faq-a">AICTE recommends: Percentage = CGPA × 9.5. So 8.0 CGPA = 76%. This is the most widely accepted formula in India for job applications and government forms when your university has no specific formula.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Which formula should I use for job applications?<span class="faq-arrow">+</span></button>
+      <div class="faq-a">Always use your university's official formula. If HR asks for a general conversion and your university has none, use CGPA × 9.5 — accepted by most Indian companies including TCS, Infosys, Wipro, and government PSUs.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">How does Anna University convert CGPA to percentage?<span class="faq-arrow">+</span></button>
+      <div class="faq-a">Anna University uses: Percentage = CGPA × 10. A CGPA of 8.2 = 82%. This is the simplest and most straightforward conversion, officially prescribed for all affiliated engineering colleges in Tamil Nadu.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">What CGPA is needed for campus placements in India?<span class="faq-arrow">+</span></button>
+      <div class="faq-a">Most companies have a CGPA cutoff of 6.5–7.0. MNCs like Google and Microsoft look for 7.5+. PSUs like ISRO, BARC require 6.5+. A CGPA of 7.5+ makes you eligible for 95% of campus placement opportunities.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">How do autonomous colleges calculate percentage?<span class="faq-arrow">+</span></button>
+      <div class="faq-a">Autonomous colleges may follow their parent university's formula or define their own. Most use CGPA × 10 or CGPA × 9.5. Always check your marksheet or academic office for your institution's official formula.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Is 7 CGPA considered First Class?<span class="faq-arrow">+</span></button>
+      <div class="faq-a">Yes — 7.0 CGPA typically converts to 60–70%, which qualifies as First Class in most Indian universities. First Class with Distinction is generally above 75% (roughly 7.9+ CGPA under AICTE formula).</div>
+    </div>
+  </div>
+
+  <footer>
+    <p>Formulas based on officially published guidelines. Always verify with your university's official notification.</p>
+    <p style="margin-top:0.5rem;font-weight:700;color:var(--accent)">© 2025 CGPA Converter India · Free for all students</p>
+  </footer>
+</div>
+
+<script>
+const universities = [
+  // Karnataka
+  { id:'vtu',       name:'VTU',               fullName:'Visvesvaraya Technological University',        state:'karnataka',  formula: c=>(c-0.75)*10,    formulaText:'(CGPA − 0.75) × 10' },
+  { id:'bu',        name:'Bangalore Univ.',    fullName:'Bangalore University',                        state:'karnataka',  formula: c=>(c-0.75)*10,    formulaText:'(CGPA − 0.75) × 10' },
+  { id:'mysore',    name:'Mysore Univ.',       fullName:'University of Mysore',                        state:'karnataka',  formula: c=>c*10,            formulaText:'CGPA × 10' },
+  { id:'mangalore', name:'Mangalore Univ.',    fullName:'Mangalore University',                        state:'karnataka',  formula: c=>c*10,            formulaText:'CGPA × 10' },
+  { id:'kuvempu',   name:'Kuvempu Univ.',      fullName:'Kuvempu University',                          state:'karnataka',  formula: c=>c*10,            formulaText:'CGPA × 10' },
+  { id:'tumkur',    name:'Tumkur Univ.',       fullName:'Tumkur University',                           state:'karnataka',  formula: c=>c*10,            formulaText:'CGPA × 10' },
+  { id:'davangere', name:'Davangere Univ.',    fullName:'Davangere University',                        state:'karnataka',  formula: c=>c*10,            formulaText:'CGPA × 10' },
+  // VTU Autonomous Colleges
+  { id:'rvce',      name:'RVCE',              fullName:'R.V. College of Engineering (VTU Autonomous)', state:'vtu-auto',   formula: c=>c*10,            formulaText:'CGPA × 10' },
+  { id:'bmsit',     name:'BMS CET',           fullName:'BMS College of Engineering (VTU Autonomous)',  state:'vtu-auto',   formula: c=>c*10,            formulaText:'CGPA × 10' },
+  { id:'msrit',     name:'MSRIT',             fullName:'M.S. Ramaiah Inst. of Technology (VTU Auto)', state:'vtu-auto',   formula: c=>c*10,            formulaText:'CGPA × 10' },
+  { id:'dsce',      name:'DSCE',              fullName:'Dayananda Sagar College of Engg (VTU Auto)',  state:'vtu-auto',   formula: c=>c*10,            formulaText:'CGPA × 10' },
+  { id:'nmit',      name:'NMIT',              fullName:'Nitte Meenakshi Inst. of Technology (VTU Auto)',state:'vtu-auto',  formula: c=>c*10,            formulaText:'CGPA × 10' },
+  { id:'jssate',    name:'JSS ATE Noida',     fullName:'JSS Academy of Tech. Education (VTU Auto)',   state:'vtu-auto',   formula: c=>c*10,            formulaText:'CGPA × 10' },
+  { id:'bmsce',     name:'BMSCE',             fullName:'B.M.S. College of Engineering (VTU Auto)',    state:'vtu-auto',   formula: c=>c*10,            formulaText:'CGPA × 10' },
+  { id:'rnsit',     name:'RNSIT',             fullName:'R.N.S. Inst. of Technology (VTU Autonomous)', state:'vtu-auto',   formula: c=>c*10,            formulaText:'CGPA × 10' },
+  { id:'cmrit',     name:'CMRIT',             fullName:'CMR Inst. of Technology (VTU Autonomous)',    state:'vtu-auto',   formula: c=>c*10,            formulaText:'CGPA × 10' },
+  { id:'sit',       name:'SIT Tumkur',        fullName:'Siddaganga Inst. of Technology (VTU Auto)',   state:'vtu-auto',   formula: c=>c*10,            formulaText:'CGPA × 10' },
+  { id:'biet',      name:'BIET Davangere',    fullName:'Bapuji Inst. of Engg & Technology (VTU Auto)',state:'vtu-auto',   formula: c=>c*10,            formulaText:'CGPA × 10' },
+  { id:'git',       name:'GIT Belgaum',       fullName:'Gogte Inst. of Technology (VTU Autonomous)',  state:'vtu-auto',   formula: c=>c*10,            formulaText:'CGPA × 10' },
+  { id:'kletech',   name:'KLE Tech Hubli',    fullName:'KLE Technological University (Deemed)',       state:'vtu-auto',   formula: c=>c*10,            formulaText:'CGPA × 10' },
+  { id:'drait',     name:'Dr. AIT Bangalore', fullName:'Dr. Ambedkar Inst. of Technology (VTU Auto)',state:'vtu-auto',   formula: c=>c*10,            formulaText:'CGPA × 10' },
+  { id:'nhce',      name:'NHCE Bangalore',    fullName:'New Horizon College of Engineering (VTU Auto)',state:'vtu-auto',  formula: c=>c*10,            formulaText:'CGPA × 10' },
+  { id:'aiet',      name:'AIET Mangalore',    fullName:'Aloysius Inst. of Engineering & Tech (VTU)', state:'vtu-auto',   formula: c=>c*10,            formulaText:'CGPA × 10' },
+  { id:'smvitm',    name:'SMVITM Udupi',      fullName:'Shri Madhwa Vadiraja Inst. of Tech (VTU)',   state:'vtu-auto',   formula: c=>c*10,            formulaText:'CGPA × 10' },
+  { id:'stjit',     name:'St. Joseph Engg',   fullName:'St. Joseph Engineering College (VTU Auto)',  state:'vtu-auto',   formula: c=>c*10,            formulaText:'CGPA × 10' },
+  { id:'ewit',      name:'EWIT Bangalore',    fullName:'East West Inst. of Technology (VTU Auto)',   state:'vtu-auto',   formula: c=>c*10,            formulaText:'CGPA × 10' },
+  { id:'bnmit',     name:'BNMIT Bangalore',   fullName:'BNM Inst. of Technology (VTU Autonomous)',   state:'vtu-auto',   formula: c=>c*10,            formulaText:'CGPA × 10' },
+  { id:'sirmvit',   name:'Sir MVIT',          fullName:'Sir M. Visvesvaraya Inst. of Technology',    state:'vtu-auto',   formula: c=>c*10,            formulaText:'CGPA × 10' },
+  { id:'hkbk',      name:'HKBK College',      fullName:'HKBK College of Engineering (VTU Auto)',     state:'vtu-auto',   formula: c=>c*10,            formulaText:'CGPA × 10' },
+  { id:'gssietw',   name:'GSS Inst. Tech.',   fullName:'Global Srinivas SOET (VTU Autonomous)',      state:'vtu-auto',   formula: c=>c*10,            formulaText:'CGPA × 10' },
+  { id:'presidency',name:'Presidency Univ.',  fullName:'Presidency University, Bangalore (Autonomous)',state:'vtu-auto',  formula: c=>c*10,            formulaText:'CGPA × 10' },
+  // Tamil Nadu
+  { id:'anna',      name:'Anna University',    fullName:'Anna University, Chennai',                    state:'tamilnadu',  formula: c=>c*10,            formulaText:'CGPA × 10' },
+  { id:'madras',    name:'Madras Univ.',       fullName:'University of Madras',                        state:'tamilnadu',  formula: c=>c*10,            formulaText:'CGPA × 10' },
+  { id:'bharathiar',name:'Bharathiar Univ.',   fullName:'Bharathiar University, Coimbatore',           state:'tamilnadu',  formula: c=>c*10,            formulaText:'CGPA × 10' },
+  { id:'vit',       name:'VIT (Vellore)',      fullName:'VIT University (Autonomous)',                 state:'tamilnadu',  formula: c=>c*10,            formulaText:'CGPA × 10' },
+  { id:'sastra',    name:'SASTRA Univ.',       fullName:'SASTRA University (Autonomous)',              state:'tamilnadu',  formula: c=>c*10,            formulaText:'CGPA × 10' },
+  // Maharashtra
+  { id:'mumbai',    name:'Mumbai Univ.',       fullName:'University of Mumbai',                        state:'maharashtra',formula: c=>7.1*c+11,        formulaText:'(7.1 × CGPA) + 11' },
+  { id:'pune',      name:'SPPU Pune',          fullName:'Savitribai Phule Pune University',            state:'maharashtra',formula: c=>c*10,            formulaText:'CGPA × 10' },
+  { id:'nagpur',    name:'Nagpur Univ.',       fullName:'RTM Nagpur University',                       state:'maharashtra',formula: c=>c*10,            formulaText:'CGPA × 10' },
+  { id:'solapur',   name:'Solapur Univ.',      fullName:'Solapur University',                          state:'maharashtra',formula: c=>c*10,            formulaText:'CGPA × 10' },
+  // Delhi / NCR
+  { id:'ip',        name:'IP University',      fullName:'Guru Gobind Singh IP University, Delhi',      state:'delhi',      formula: c=>(c-0.5)*10,     formulaText:'(CGPA − 0.5) × 10' },
+  { id:'du',        name:'Delhi Univ. (DU)',   fullName:'University of Delhi',                         state:'delhi',      formula: c=>c*9.5,           formulaText:'CGPA × 9.5' },
+  { id:'dtu',       name:'DTU Delhi',          fullName:'Delhi Technological University (Autonomous)', state:'delhi',      formula: c=>c*10,            formulaText:'CGPA × 10' },
+  { id:'nsit',      name:'NSIT / IGDTUW',      fullName:'Netaji Subhas Inst. of Technology (Autonomous)',state:'delhi',   formula: c=>c*10,            formulaText:'CGPA × 10' },
+  // AP / Telangana
+  { id:'jntuh',     name:'JNTU Hyderabad',     fullName:'JNTU Hyderabad',                              state:'andhra',     formula: c=>c*10,            formulaText:'CGPA × 10' },
+  { id:'jntua',     name:'JNTU Anantapur',     fullName:'JNTU Anantapur',                              state:'andhra',     formula: c=>c*10,            formulaText:'CGPA × 10' },
+  { id:'jntuk',     name:'JNTU Kakinada',      fullName:'JNTU Kakinada',                               state:'andhra',     formula: c=>c*10,            formulaText:'CGPA × 10' },
+  { id:'osmania',   name:'Osmania Univ.',      fullName:'Osmania University, Hyderabad',               state:'andhra',     formula: c=>c*10,            formulaText:'CGPA × 10' },
+  { id:'au',        name:'Andhra Univ.',       fullName:'Andhra University, Visakhapatnam',            state:'andhra',     formula: c=>c*10,            formulaText:'CGPA × 10' },
+  { id:'ku',        name:'Kakatiya Univ.',     fullName:'Kakatiya University, Warangal',               state:'andhra',     formula: c=>c*10,            formulaText:'CGPA × 10' },
+  // Gujarat
+  { id:'gtu',       name:'GTU Gujarat',        fullName:'Gujarat Technological University',            state:'gujarat',    formula: c=>c*10,            formulaText:'CGPA × 10' },
+  { id:'guniahmd',  name:'Gujarat Univ.',      fullName:'Gujarat University, Ahmedabad',               state:'gujarat',    formula: c=>c*10,            formulaText:'CGPA × 10' },
+  { id:'msu',       name:'MSU Baroda',         fullName:'Maharaja Sayajirao University, Baroda',       state:'gujarat',    formula: c=>c*10,            formulaText:'CGPA × 10' },
+  // UP / MP
+  { id:'aktu',      name:'AKTU (UPTU)',        fullName:'Dr. APJ Abdul Kalam Tech. University, UP',   state:'up',         formula: c=>c*10,            formulaText:'CGPA × 10' },
+  { id:'rgpv',      name:'RGPV Bhopal',        fullName:'Rajiv Gandhi Proudyogiki Vishwavidyalaya, MP',state:'up',        formula: c=>c*10,            formulaText:'CGPA × 10' },
+  { id:'bhu',       name:'BHU Varanasi',       fullName:'Banaras Hindu University',                    state:'up',         formula: c=>c*9.5,           formulaText:'CGPA × 9.5' },
+  { id:'amity',     name:'Amity University',   fullName:'Amity University (Autonomous)',               state:'up',         formula: c=>c*10,            formulaText:'CGPA × 10' },
+  // Rajasthan
+  { id:'rtu',       name:'RTU Rajasthan',      fullName:'Rajasthan Technical University, Kota',        state:'rajasthan',  formula: c=>c*10,            formulaText:'CGPA × 10' },
+  { id:'uniraj',    name:'Univ. of Rajasthan', fullName:'University of Rajasthan, Jaipur',             state:'rajasthan',  formula: c=>c*9.5,           formulaText:'CGPA × 9.5' },
+  { id:'bits',      name:'BITS Pilani',        fullName:'BITS Pilani (Autonomous)',                    state:'rajasthan',  formula: c=>c*10,            formulaText:'CGPA × 10' },
+  // Kerala
+  { id:'calicut',   name:'Calicut Univ.',      fullName:'University of Calicut',                       state:'kerala',     formula: c=>c*10,            formulaText:'CGPA × 10' },
+  { id:'ktu',       name:'KTU Kerala',         fullName:'APJ Abdul Kalam Technological University KL', state:'kerala',    formula: c=>(c-0.5)*10,     formulaText:'(CGPA − 0.5) × 10' },
+  { id:'cusat',     name:'CUSAT',             fullName:'Cochin University of Science & Technology',    state:'kerala',     formula: c=>c*10,            formulaText:'CGPA × 10' },
+  { id:'kerala',    name:'Kerala Univ.',       fullName:'University of Kerala, Thiruvananthapuram',    state:'kerala',     formula: c=>c*10,            formulaText:'CGPA × 10' },
+  // National
+  { id:'aicte',     name:'AICTE / General',   fullName:'AICTE Recommended (General Formula)',          state:'national',   formula: c=>c*9.5,           formulaText:'CGPA × 9.5' },
+  { id:'nit',       name:'NIT (General)',      fullName:'National Institutes of Technology',           state:'national',   formula: c=>c*9.5,           formulaText:'CGPA × 9.5' },
+  { id:'iit',       name:'IIT (General)',      fullName:'Indian Institutes of Technology',             state:'national',   formula: c=>c*9.5,           formulaText:'CGPA × 9.5' },
+  // Show All
+  { id:'all', name:'⊕ Show All', fullName:'Compare All Universities Side by Side', state:'all', formula:null, formulaText:'Comparing all university formulas' },
+];
+
+let currentUni = 'vtu';
+let currentState = 'all';
+
+function buildGrid(filter='', state='all') {
+  const grid = document.getElementById('uniGrid');
+  grid.innerHTML = '';
+  universities.forEach(u => {
+    const ms = filter==='' || u.name.toLowerCase().includes(filter) || u.fullName.toLowerCase().includes(filter) || u.id.includes(filter);
+    const mstate = state==='all' ? true : (u.state===state);
+    if (!ms || !mstate) return;
+    const btn = document.createElement('button');
+    btn.className = 'uni-btn' + (u.id===currentUni ? ' active' : '');
+    btn.dataset.id = u.id;
+    btn.innerHTML = `${u.name}<small>${u.fullName}</small>`;
+    btn.onclick = () => selectUni(u.id);
+    grid.appendChild(btn);
+  });
+}
+
+function buildFormulaTable() {
+  const tb = document.getElementById('formulaTableBody');
+  const stateLabels = {karnataka:'Karnataka','vtu-auto':'VTU Autonomous',tamilnadu:'Tamil Nadu',maharashtra:'Maharashtra',delhi:'Delhi/NCR',andhra:'AP/Telangana',gujarat:'Gujarat',up:'UP/MP',rajasthan:'Rajasthan',kerala:'Kerala',national:'National'};
+  universities.filter(u=>u.id!=='all').forEach(u => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${u.name}<br><span style="color:var(--muted);font-size:0.72rem">${u.fullName}</span></td><td style="color:var(--muted)">${stateLabels[u.state]||u.state}</td><td>${u.formulaText}</td>`;
+    tb.appendChild(tr);
+  });
+}
+
+function filterUniversities() {
+  buildGrid(document.getElementById('uniSearch').value.toLowerCase().trim(), currentState);
+}
+
+function filterByState(state, btn) {
+  currentState = state;
+  document.querySelectorAll('.state-tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  buildGrid(document.getElementById('uniSearch').value.toLowerCase().trim(), state);
+}
+
+function selectUni(id) {
+  currentUni = id;
+  buildGrid(document.getElementById('uniSearch').value.toLowerCase().trim(), currentState);
+  const u = universities.find(x=>x.id===id);
+  document.getElementById('formulaText').textContent = u.id==='all' ? 'Comparing all university formulas' : `Percentage = ${u.formulaText}`;
+  document.getElementById('formulaNote').textContent = u.fullName;
+  document.getElementById('formulaAuto').style.display = u.state==='vtu-auto' ? 'block' : 'none';
+  const val = parseFloat(document.getElementById('cgpaInput').value);
+  if (!isNaN(val) && val>=0 && val<=10) convert();
+  else {
+    document.getElementById('resultCard').classList.remove('show');
+    document.getElementById('allResults').classList.remove('show');
+    document.getElementById('showAllHint').style.display = (id==='all') ? 'block' : 'none';
+  }
+}
+
+function getGrade(pct) {
+  if (pct>=90) return {label:'🏆 Outstanding — First Class with Distinction', cls:'Outstanding'};
+  if (pct>=75) return {label:'⭐ First Class with Distinction', cls:'1st w/ Distinction'};
+  if (pct>=60) return {label:'✅ First Class', cls:'First Class'};
+  if (pct>=50) return {label:'👍 Second Class', cls:'Second Class'};
+  if (pct>=40) return {label:'⚠️ Pass Class', cls:'Pass Class'};
+  return {label:'❌ Below passing threshold', cls:'Fail'};
+}
+
+function convert() {
+  const cgpa = parseFloat(document.getElementById('cgpaInput').value);
+  const error = document.getElementById('errorMsg');
+  if (isNaN(cgpa)||cgpa<0||cgpa>10) { error.classList.add('show'); document.getElementById('resultCard').classList.remove('show'); document.getElementById('allResults').classList.remove('show'); return; }
+  error.classList.remove('show');
+  document.getElementById('showAllHint').style.display = 'none';
+  if (currentUni==='all') {
+    document.getElementById('resultCard').classList.remove('show');
+    const list = document.getElementById('allResultsList');
+    list.innerHTML='';
+    universities.filter(u=>u.id!=='all').forEach(u=>{
+      const pct = Math.max(0, u.formula(cgpa)).toFixed(2);
+      list.innerHTML += `<div class="result-row"><div><div class="uni-name">${u.name}</div><div class="uni-formula">${u.formulaText}</div></div><div class="uni-pct">${pct}%</div></div>`;
+    });
+    document.getElementById('allResults').classList.add('show');
+  } else {
+    document.getElementById('allResults').classList.remove('show');
+    const u = universities.find(x=>x.id===currentUni);
+    const pct = Math.max(0, u.formula(cgpa));
+    const grade = getGrade(pct);
+    document.getElementById('resultValue').textContent = pct.toFixed(2)+'%';
+    document.getElementById('resultGrade').textContent = grade.label;
+    document.getElementById('metaCgpa').textContent = cgpa.toFixed(2);
+    document.getElementById('metaUni').textContent = u.name;
+    document.getElementById('metaClass').textContent = grade.cls;
+    const rc = document.getElementById('resultCard');
+    rc.classList.remove('show'); void rc.offsetWidth; rc.classList.add('show');
+  }
+}
+
+function autoConvert() {
+  const v = parseFloat(document.getElementById('cgpaInput').value);
+  if (!isNaN(v)&&v>=0&&v<=10) convert();
+}
+
+function toggleFaq(btn) {
+  const a = btn.nextElementSibling;
+  const open = a.classList.contains('open');
+  document.querySelectorAll('.faq-a').forEach(x=>x.classList.remove('open'));
+  document.querySelectorAll('.faq-q').forEach(x=>x.classList.remove('open'));
+  if (!open) { a.classList.add('open'); btn.classList.add('open'); }
+}
+
+buildGrid();
+buildFormulaTable();
+</script>
+</body>
+</html>
