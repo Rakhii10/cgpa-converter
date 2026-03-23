@@ -99,9 +99,13 @@
     .faq-q.open .faq-arrow { transform: rotate(45deg); background: var(--accent); color: white; }
     .faq-a { color: var(--muted); font-size: 0.86rem; line-height: 1.75; max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.2s; }
     .faq-a.open { max-height: 260px; padding-bottom: 1rem; }
-    .formula-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
-    .formula-table th { background: var(--surface2); color: var(--muted); font-weight: 700; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.07em; padding: 0.6rem 0.8rem; text-align: left; border-bottom: 2px solid var(--border); }
-    .formula-table td { padding: 0.6rem 0.8rem; border-bottom: 1px solid var(--border); }
+    .formula-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; display: block; overflow-x: auto; }
+    .formula-table thead, .formula-table tbody { display: table; width: 100%; table-layout: fixed; }
+    .formula-table th { background: var(--surface2); color: var(--muted); font-weight: 700; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.07em; padding: 0.6rem 0.8rem; text-align: left; border-bottom: 2px solid var(--border); word-break: break-word; }
+    .formula-table td { padding: 0.6rem 0.8rem; border-bottom: 1px solid var(--border); word-break: break-word; }
+    .formula-table th:nth-child(1), .formula-table td:nth-child(1) { width: 40%; }
+    .formula-table th:nth-child(2), .formula-table td:nth-child(2) { width: 25%; }
+    .formula-table th:nth-child(3), .formula-table td:nth-child(3) { width: 35%; }
     .formula-table tr:last-child td { border-bottom: none; }
     .formula-table td:last-child { color: var(--accent); font-weight: 700; }
     .formula-table tr:hover td { background: var(--accent-light); }
